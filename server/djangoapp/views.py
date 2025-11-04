@@ -1,20 +1,17 @@
 # Uncomment the required imports before adding the code
-from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404, render, redirect
-from django.contrib.auth import logout
-from django.contrib import messages
-from datetime import datetime
-from django.http import JsonResponse
-from django.contrib.auth import login, authenticate
-import logging
 import json
-from django.views.decorators.csrf import csrf_exempt
-from .populate import initiate
-from .models import CarMake, CarModel
-from .restapis import get_request, analyze_review_sentiments, post_review
+import logging
 
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.http import JsonResponse
+from django.shortcuts import redirect, render
+from django.views.decorators.csrf import csrf_exempt
+
+from .models import CarMake, CarModel
+from .populate import initiate
+from .restapis import analyze_review_sentiments, get_request, post_review
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -31,14 +28,18 @@ def login_user(request):
     try:
         data = json.loads(request.body or b"{}")
     except Exception:
-        return JsonResponse({"error": "Invalid JSON in request body"}, status=400)
+        return JsonResponse(
+            {"error": "Invalid JSON in request body"}, status=400
+        )
 
     # Use .get() to avoid KeyError and support multiple possible keys
     username = data.get("userName") or data.get("username") or ""
     password = data.get("password", "")
 
     if not username or not password:
-        return JsonResponse({"error": "username and password are required"}, status=400)
+        return JsonResponse(
+            {"error": "username and password are required"}, status=400
+        )
     # Try to check if provide credential can be authenticated
     user = authenticate(username=username, password=password)
     response = {"userName": username}
@@ -72,7 +73,9 @@ def registration(request):
 
         # Check if username already exists
         if User.objects.filter(username=username).exists():
-            messages.error(request, "Username already taken. Please choose another.")
+            messages.error(
+                request, "Username already taken. Please choose another."
+            )
             return redirect("register")
 
         # Check if email already exists
@@ -93,7 +96,8 @@ def registration(request):
         # Log the user in automatically after registration
         login(request, user)
         messages.success(
-            request, f"Welcome, {user.first_name}! Your account has been created."
+            request,
+            f"Welcome, {user.first_name}! Your account has been created.",
         )
         return redirect("home")
 
@@ -110,13 +114,16 @@ def get_cars(request):
     car_models = CarModel.objects.select_related("car_make")
     cars = []
     for car_model in car_models:
-        cars.append({"CarModel": car_model.name, "CarMake": car_model.car_make.name})
+        cars.append(
+            {"CarModel": car_model.name, "CarMake": car_model.car_make.name}
+        )
     return JsonResponse({"CarModels": cars})
 
 
 # # Update the `get_dealerships` view to render the index page with
 # a list of dealerships
-# Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
+# Update the `get_dealerships` render list of dealerships all by default,
+# particular state if state is passed
 def get_dealerships(request, state="All"):
     if state == "All":
         endpoint = "/fetchDealers"
@@ -158,7 +165,9 @@ def add_review(request):
         try:
             response = post_review(data)
             return JsonResponse({"status": 200})
-        except:
-            return JsonResponse({"status": 401, "message": "Error in posting review"})
+        except Exception as e:
+            return JsonResponse(
+                {"status": 401, "message": "Error in posting review"}
+            )
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})

@@ -1,17 +1,21 @@
-import requests
 import os
+from urllib.parse import quote, urlencode, urljoin
+
+import requests
 from dotenv import load_dotenv
-from urllib.parse import urljoin, urlencode, quote
 
 load_dotenv()
 
 backend_url = os.getenv("BACKEND_URL", "http://localhost:3030")
-sentiment_analyzer_url = os.getenv("SENTIMENT_ANALYZER_URL", "http://localhost:5050")
+sentiment_analyzer_url = os.getenv(
+    "SENTIMENT_ANALYZER_URL", "http://localhost:5050"
+)
 
 
 def get_request(endpoint, **kwargs):
     """
-    Generic GET request handler using urllib.parse.urlencode for explicit encoding.
+    Generic GET request handler using urllib.parse.urlencode
+    for explicit encoding.
     """
     try:
         # Safely join base URL and endpoint
@@ -39,7 +43,9 @@ def analyze_review_sentiments(text):
     """
     try:
         encoded_text = quote(text)
-        request_url = urljoin(sentiment_analyzer_url, f"/analyze/{encoded_text}")
+        request_url = urljoin(
+            sentiment_analyzer_url, f"/analyze/{encoded_text}"
+        )
 
         print(f"GET from {request_url}")
         response = requests.get(request_url)

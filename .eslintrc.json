@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended" // This catches React Hook errors
+  ],
+  "plugins": ["react", "react-hooks"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // Automatically detect the installed React version
+    }
+  },
+  "rules": {
+    // Example: Turn off rule that requires explicit React import for newer React versions
+    "react/react-in-jsx-scope": "off",
+    // Example: Turn off prop-types for function components
+    "react/prop-types": "off",
+    // Example: Warn about unused variables instead of erroring
+    "no-unused-vars": "warn"
+  }
+}

@@ -1,0 +1,21 @@
+# ruff.toml
+
+# --- General Configuration ---
+target-version = "py312"
+line-length = 79
+
+# --- Linting Configuration (New Structure) ---
+[lint]
+# Select all rules enforced by default by Ruff's equivalents for Flake8 (F, E, W), 
+# plus specific rules for imports (I) and quality checks (B, G).
+select = ["F", "E", "W", "I", "B", "G"]
+
+[lint.per-file-ignores]
+# Ignore Line Too Long (E501) for specific files
+"models.py" = ["E501"]
+"settings.py" = ["E501"]
+# Note: We'll remove ignores later, but let's keep them for now.
+"views.py" = ["F841", "F811"] 
+
+[lint.pydocstyle]
+convention = "google"
