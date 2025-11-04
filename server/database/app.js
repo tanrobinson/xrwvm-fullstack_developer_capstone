@@ -6,7 +6,8 @@ const app = express();
 const port = 3030;
 
 app.use(cors());
-app.use(require("body-parser").urlencoded({ extended: false }));
+app.use(express.json());
+// app.use(require("body-parser").urlencoded({ extended: false }));
 
 const reviews_data = JSON.parse(fs.readFileSync("reviews.json", "utf8"));
 const dealerships_data = JSON.parse(
@@ -27,7 +28,7 @@ try {
     Dealerships.insertMany(dealerships_data["dealerships"]);
   });
 } catch (error) {
-  res.status(500).json({ error: "Error fetching documents" });
+  console.error("Error during database seeding:", error);
 }
 
 // Express route to home
@@ -86,8 +87,8 @@ app.get("/fetchDealer/:id", async (req, res) => {
 });
 
 //Express route to insert review
-app.post("/insert_review", express.raw({ type: "*/*" }), async (req, res) => {
-  data = JSON.parse(req.body);
+app.post("/insert_review", async (req, res) => {
+  const data = req.body;
   const documents = await Reviews.find().sort({ id: -1 });
   let new_id = documents[0]["id"] + 1;
 
