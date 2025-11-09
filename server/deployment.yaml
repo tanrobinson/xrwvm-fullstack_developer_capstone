@@ -27,3 +27,15 @@ spec:
             - containerPort: 8000
               protocol: TCP
       restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dealership-service
+spec:
+  selector:
+    run: dealership
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
