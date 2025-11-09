@@ -6,9 +6,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-backend_url = os.getenv("BACKEND_URL", "http://localhost:3030")
+backend_url = os.getenv("BACKEND_URL", "http://node-api-service:3030")
 sentiment_analyzer_url = os.getenv(
-    "SENTIMENT_ANALYZER_URL", "http://localhost:5050"
+    "SENTIMENT_ANALYZER_URL", "http://sentiment-analyzer-service:5050"
 )
 
 

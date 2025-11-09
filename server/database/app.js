@@ -14,7 +14,9 @@ const dealerships_data = JSON.parse(
   fs.readFileSync("dealerships.json", "utf8")
 );
 
-mongoose.connect("mongodb://mongo_db:27017/", { dbName: "dealershipsDB" });
+const mongo_url = process.env.MONGO_DB_URL;
+console.log(`Connecting to MongoDB at ${mongo_url}`);
+mongoose.connect(mongo_url, { dbName: "dealershipsDB" });
 
 const Reviews = require("./review");
 
