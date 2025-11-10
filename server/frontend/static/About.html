@@ -2,8 +2,10 @@
 <head>
   <link rel="stylesheet" href="/static/style.css">
   <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/common.js"></script>
 </head>
-<div>
+<body onload="checkSession()">
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
     <div class="container-fluid">
       <h2 style="padding-right: 5%;">Dealerships</h2>
@@ -13,20 +15,21 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" style="font-size: larger;" aria-current="page" href="/">Home</a>
+            <a class="nav-link" style="font-size: larger;" aria-current="page" href="/static/Home.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" style="font-size: larger;" href="/about">About Us</a>
+            <a class="nav-link active" style="font-size: larger;" href="/static/About.html">About Us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="font-size: larger;" href="/contact">Contact Us</a>
-          </li>
-        </ul>
+            <a class="nav-link" style="font-size: larger;" href="/static/Contact.html">Contact Us</a>
+            </li>
+          </ul>
+          <span class="navbar-text">
+            <div class="loginlink" id="loginlogout"></div>
+          </span>
       </div>
     </div>
-  </nav>
-  
-  <div class="card border-0" style="width: 80%;margin: auto; margin-top:5%;">
+  </nav>  <div class="card border-0" style="width: 80%;margin: auto; margin-top:5%;">
       <div class="banner" name="about-header">
         <h1>About Us</h1>
         <p class="text-justify" style="max-width:80%;">Welcome to Best Cars dealership, home to the best cars in North America. We deal in sale of domestic and imported cars at reasonable prices.</p>
@@ -64,7 +67,5 @@
     </div>
     </div>
     </div>
-    
-</div>
-
+</body>
 </html>

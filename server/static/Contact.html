@@ -13,8 +13,9 @@
     />
     <!-- Link your custom CSS -->
     <link rel="stylesheet" href="/static/style.css" />
+    <script src="/static/js/common.js"></script>
   </head>
-  <body>
+  <body onload="checkSession()">
     <!-- Navbar -->
     <nav
       class="navbar navbar-expand-lg navbar-light"
@@ -40,12 +41,15 @@
                 class="nav-link"
                 style="font-size: larger"
                 aria-current="page"
-                href="/"
+                href="/static/Home.html"
                 >Home</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="font-size: larger" href="/about"
+              <a
+                class="nav-link"
+                style="font-size: larger"
+                href="/static/About.html"
                 >About Us</a
               >
             </li>
@@ -53,11 +57,14 @@
               <a
                 class="nav-link active"
                 style="font-size: larger"
-                href="/contact"
+                href="/static/Contact.html"
                 >Contact Us</a
               >
             </li>
           </ul>
+          <span class="navbar-text">
+            <div class="loginlink" id="loginlogout"></div>
+          </span>
         </div>
       </div>
     </nav>

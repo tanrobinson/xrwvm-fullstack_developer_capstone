@@ -22,8 +22,17 @@ FROM nginx:stable-alpine
 # Copy the built files from the build stage
 COPY --from=build /app/build /usr/share/nginx/html
 
+# Create static directory
+RUN mkdir -p /usr/share/nginx/html/static
+
+# Copy all static files
+COPY static/*.* /usr/share/nginx/html/static/
+
 # Copy the nginx config file
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Add debugging: List contents of html directory
+RUN ls -la /usr/share/nginx/html/
 
 # Expose port 80
 EXPOSE 80
