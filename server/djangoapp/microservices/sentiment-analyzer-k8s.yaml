@@ -8,7 +8,7 @@ spec:
     app: sentiment-analyzer
   ports:
     - protocol: TCP
-      port: 5000
+      port: 5050
       targetPort: 5000
 ---
 # Sentiment Analyzer Deployment
