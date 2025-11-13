@@ -1,3 +1,4 @@
+# fronend Dockerfile
 # Stage 1: Build the React application
 FROM node:18 AS build
 
@@ -26,7 +27,7 @@ COPY --from=build /app/build /usr/share/nginx/html
 RUN mkdir -p /usr/share/nginx/html/static
 
 # Copy all static files
-COPY static/*.* /usr/share/nginx/html/static/
+COPY static/ /usr/share/nginx/html/static/
 
 # Copy the nginx config file
 COPY nginx.conf /etc/nginx/conf.d/default.conf

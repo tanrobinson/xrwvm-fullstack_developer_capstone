@@ -14,9 +14,7 @@ const PostReview = () => {
 
   let params = useParams();
   let id = params.id;
-  let dealer_url = `/djangoapp/dealer/${id}`;
   let review_url = `/djangoapp/add_review/`;
-  let carmodels_url = `/djangoapp/get_cars/`;
 
   const postreview = async () => {
     let name =
@@ -61,31 +59,55 @@ const PostReview = () => {
       window.location.href = window.location.origin + "/dealer/" + id;
     }
   };
-  const get_dealer = async () => {
-    const res = await fetch(dealer_url, {
-      method: "GET",
-    });
-    const retobj = await res.json();
-
-    if (retobj.status === 200) {
-      let dealerobjs = Array.from(retobj.dealer);
-      if (dealerobjs.length > 0) setDealer(dealerobjs[0]);
-    }
-  };
-
-  const get_cars = async () => {
-    const res = await fetch(carmodels_url, {
-      method: "GET",
-    });
-    const retobj = await res.json();
-
-    let carmodelsarr = Array.from(retobj.CarModels);
-    setCarmodels(carmodelsarr);
-  };
   useEffect(() => {
-    get_dealer();
-    get_cars();
-  }, []);
+    const dealer_url = `/djangoapp/dealer/${id}`;
+    const carmodels_url = `/djangoapp/get_cars/`;
+    const fetchData = async () => {
+      // Fetch dealer info
+      try {
+        const res = await fetch(dealer_url, {
+          method: "GET",
+          headers: { Accept: "application/json" },
+        });
+        if (res.ok) {
+          const retobj = await res.json();
+          if (retobj.status === 200 && retobj.dealer) {
+            const dealerobjs = Array.from(retobj.dealer || []);
+            if (dealerobjs.length > 0) setDealer(dealerobjs[0]);
+          } else {
+            console.error("Unexpected dealer response:", retobj);
+          }
+        } else {
+          console.error("Failed to fetch dealer, status:", res.status);
+        }
+      } catch (err) {
+        console.error("Error fetching dealer:", err);
+      }
+
+      // Fetch car models
+      try {
+        const res = await fetch(carmodels_url, {
+          method: "GET",
+          headers: { Accept: "application/json" },
+        });
+        if (res.ok) {
+          const retobj = await res.json();
+          if (retobj && retobj.CarModels) {
+            const carmodelsarr = Array.from(retobj.CarModels || []);
+            setCarmodels(carmodelsarr);
+          } else {
+            console.warn("No CarModels in response:", retobj);
+          }
+        } else {
+          console.error("Failed to fetch car models, status:", res.status);
+        }
+      } catch (err) {
+        console.error("Error fetching car models:", err);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   return (
     <div>

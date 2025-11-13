@@ -86,8 +86,8 @@ const checkSession = () => {
     } else {
       // No user logged in
       loginLogoutDiv.innerHTML = `
-                <a class="homepage_links" href="/">Login</a>
-                <a class="homepage_links" href="/Register">Register</a>
+                <a class="homepage_links" href="/login">Login</a>
+                <a class="homepage_links" href="/register">Register</a>
             `;
       console.log("No active session found");
     }

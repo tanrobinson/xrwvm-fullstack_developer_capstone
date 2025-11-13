@@ -3,12 +3,17 @@ kind: Service
 metadata:
   name: frontend-service
 spec:
+  # 1. Change the Service type to NodePort
+  type: NodePort
   selector:
     app: frontend
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
+      # 2. Add the nodePort field for external access.
+      # This port must be in the range 30000-32767 by default.
+      nodePort: 30800
 ---
 apiVersion: apps/v1
 kind: Deployment
