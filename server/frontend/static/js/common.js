@@ -18,7 +18,7 @@
 const logout = async (e) => {
   try {
     // First, call Django's logout endpoint to handle server-side session termination
-    const logout_url = window.location.origin + "/djangoapp/logout";
+    const logout_url = window.location.origin + "/djangoapp/logout/";
     const res = await fetch(logout_url, {
       method: "GET",
       headers: {

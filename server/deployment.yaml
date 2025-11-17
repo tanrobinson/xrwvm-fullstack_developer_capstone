@@ -26,6 +26,9 @@ spec:
           ports:
             - containerPort: 8000
               protocol: TCP
+          envFrom:
+            - secretRef:
+                name: django-superuser-secret
       restartPolicy: Always
 ---
 apiVersion: v1

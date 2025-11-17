@@ -35,6 +35,17 @@ spec:
           volumeMounts:
             - name: mongo-data
               mountPath: /data/db
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-admin-secret
+                  key: MONGO_ROOT_USER
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-admin-secret
+                  key: MONGO_ROOT_PASSWORD
   volumeClaimTemplates:
     - metadata:
         name: mongo-data
@@ -78,6 +89,6 @@ spec:
           imagePullPolicy: Never
           ports:
             - containerPort: 3030
-          env:
-            - name: MONGO_DB_URL
-              value: "mongodb://mongo-db-service:27017"
+          envFrom:
+            - configMapRef:
+                name: node-api-env

@@ -1,4 +1,4 @@
-.register_container{
+.register_container {
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -8,58 +8,120 @@
   width: 30%;
 }
 
-.inputs{
+.inputs {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.input{
+.input {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   align-items: center;
 }
 
-.input_field{
-  height:40px;
-  width:200px;
-  margin:.5cm;
+.input_field {
+  height: 40px;
+  width: 200px;
+  margin: 0.5cm;
   font-size: medium;
 }
 
-.submit_panel{
+.submit_panel {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   margin-top: 5%;
   margin-bottom: 5%;
 }
 
-.submit{
-  margin-left: 30%;
-  margin-right: 30%;
+.submit {
+  margin: auto; /* Centers the button horizontally */
   cursor: pointer;
   font-size: large;
   color: rgb(97, 64, 128);
   border-radius: 10px;
-  height:50px;
+  height: 50px;
+  width: 40%; /* Give it a proportional width for centering */
 }
 
 .submit:hover {
   background-color: wheat;
 }
 
-.header{
-  font: 4em sans-serif;
+.header {
+  display: flex; /* Makes title and icon align horizontally */
+  justify-content: space-between; /* Pushes title and icon to the ends */
+  align-items: center; /* Vertically centers content */
+  padding: 0.5cm; /* Uses padding instead of margin for internal spacing */
+  font-size: 4em sans-serif;
   color: white;
-  margin: .5cm;
 }
 
-.img_icon{
-  width:40px;
-  margin:.1cm;
-  background-color:#0C9;
-  color:#FFF;
-  border-radius:50px;
-  text-align:center;
-  box-shadow: 2px 2px 3px #999;  
+.img_icon {
+  width: 40px;
+  margin: 0.1cm;
+  background-color: #0c9;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999;
+}
+
+/* Add these styles to your Register.css file */
+
+/* 1. Password Match/Mismatch Styles */
+.input_match {
+  /* Green border for matched passwords */
+  border: 2px solid green !important;
+}
+
+.input_mismatch {
+  /* Red border for mismatched passwords */
+  border: 2px solid red !important;
+}
+
+/* Ensure default input_field style remains for fields without active validation */
+.input_field {
+  height: 40px;
+  width: 200px;
+  margin: 0.5cm;
+  font-size: medium;
+  /* Add default border to prevent shift when match/mismatch styles are applied */
+  border: 1px solid grey;
+  /* Use !important on match/mismatch styles if existing CSS is overriding */
+}
+
+/* 2. Error Message Styles (Non-shifting) */
+/* This container ensures the Register button doesn't move when the error message appears */
+.error_message_container {
+  /* Set a fixed height equal to the error message line height */
+  height: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.error_message {
+  color: red;
+  font-weight: bold;
+  font-size: small;
+  /* Optional: Center the message relative to the container */
+  display: block;
+}
+
+/* The submit panel holds the error container and the button */
+.submit_panel {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.close_icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  /* Override any image-wide styles that might break it */
+  background-color: transparent;
+  border-radius: 0;
 }

@@ -57,33 +57,67 @@ def login_user(request):
 # Create a `logout_request` view to handle sign out request
 def logout_request(request):
     logout(request)  # Terminate user session
-    data = {"userName": ""}  # Return empty username
+    # Return empty username and success status
+    data = {"userName": "", "status": "success"}
     return JsonResponse(data)
 
 
 # Create a `registration` view to handle sign up request
 @csrf_exempt
 def registration(request):
-    if request.method == "POST":
-        first_name = request.POST.get("first_name")
-        last_name = request.POST.get("last_name")
-        username = request.POST.get("username")
-        email = request.POST.get("email")
-        password = request.POST.get("password")
+    # Ensure the request method is POST. Client-side fetch is POST.
+    if request.method != "POST":
+        return JsonResponse(
+            {"error": "Only POST requests are accepted"}, status=405
+        )
 
-        # Check if username already exists
-        if User.objects.filter(username=username).exists():
-            messages.error(
-                request, "Username already taken. Please choose another."
-            )
-            return redirect("register")
+    # 1. Safely parse the JSON body, just like in login_user
+    try:
+        # Use request.body or b"{}" for safety, then load JSON
+        data = json.loads(request.body or b"{}")
+    except json.JSONDecodeError:
+        logger.error("Invalid JSON in registration request body")
+        return JsonResponse(
+            {"error": "Invalid JSON in request body"}, status=400
+        )
 
-        # Check if email already exists
-        if User.objects.filter(email=email).exists():
-            messages.error(request, "Email already registered.")
-            return redirect("register")
+    # 2. Extract data, matching the keys used by Register.jsx
+    # (userName, firstName, lastName)
+    username = data.get("userName")
+    password = data.get("password")
+    first_name = data.get("firstName")
+    last_name = data.get("lastName")
+    email = data.get("email")
 
-        # Create the user
+    # Input validation (Crucial to prevent the ValueError)
+    if not username or not password or not email:
+        return JsonResponse(
+            {"error": "All fields (username, password, email) are required"},
+            status=400,
+        )
+
+    # 3. Check for existence (username and email)
+    if User.objects.filter(username=username).exists():
+        logger.warning(
+            f"Registration attempt failed: Username {username} already taken."
+        )
+        # Client expects a JSON response, not a redirect
+        return JsonResponse(
+            {"userName": username, "error": "Already Registered"},
+            status=200,  # Use 200 for a successful check, client handles the error message
+        )
+
+    if User.objects.filter(email=email).exists():
+        logger.warning(
+            f"Registration attempt failed: Email {email} already taken."
+        )
+        return JsonResponse(
+            {"userName": username, "error": "Email already registered"},
+            status=200,
+        )
+
+    # 4. Create the user and handle successful response
+    try:
         user = User.objects.create_user(
             username=username,
             email=email,
@@ -95,13 +129,18 @@ def registration(request):
 
         # Log the user in automatically after registration
         login(request, user)
-        messages.success(
-            request,
-            f"Welcome, {user.first_name}! Your account has been created.",
-        )
-        return redirect("home")
 
-    return render(request, "register.html")
+        # Return success JSON response (what Register.jsx expects)
+        return JsonResponse(
+            {"userName": username, "status": "success"},
+            status=200,
+        )
+    except Exception as e:
+        logger.error(f"Error during user creation: {e}")
+        return JsonResponse(
+            {"error": f"Server error during registration: {e}"},
+            status=500,
+        )
 
 
 # Create a `get_cars` view to return a list of cars

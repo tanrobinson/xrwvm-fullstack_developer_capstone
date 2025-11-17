@@ -7,7 +7,7 @@ const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  let login_url = "/djangoapp/login";
+  let login_url = "/djangoapp/login/";
 
   const login = async (e) => {
     e.preventDefault();

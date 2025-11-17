@@ -55,8 +55,16 @@ const PostReview = () => {
     });
 
     const json = await res.json();
+    console.log("SERVER RESPONSE TO ADD REVIEW", json);
     if (json.status === 200) {
       window.location.href = window.location.origin + "/dealer/" + id;
+    } else {
+      // Log the rejection reason if the server sends one
+      alert(
+        `Failed to post review. Server message: ${
+          json.message || "Unknown Error"
+        }`
+      );
     }
   };
   useEffect(() => {

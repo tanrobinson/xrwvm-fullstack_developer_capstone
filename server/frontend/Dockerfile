@@ -32,9 +32,6 @@ COPY static/ /usr/share/nginx/html/static/
 # Copy the nginx config file
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Add debugging: List contents of html directory
-RUN ls -la /usr/share/nginx/html/
-
 # Expose port 80
 EXPOSE 80
 

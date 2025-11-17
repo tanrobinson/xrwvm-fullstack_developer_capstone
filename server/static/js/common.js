@@ -18,7 +18,7 @@
 const logout = async (e) => {
   try {
     // First, call Django's logout endpoint to handle server-side session termination
-    const logout_url = window.location.origin + "/djangoapp/logout";
+    const logout_url = window.location.origin + "/djangoapp/logout/";
     const res = await fetch(logout_url, {
       method: "GET",
       headers: {
@@ -86,8 +86,8 @@ const checkSession = () => {
     } else {
       // No user logged in
       loginLogoutDiv.innerHTML = `
-                <a class="homepage_links" href="/">Login</a>
-                <a class="homepage_links" href="/Register">Register</a>
+                <a class="homepage_links" href="/login">Login</a>
+                <a class="homepage_links" href="/register">Register</a>
             `;
       console.log("No active session found");
     }
