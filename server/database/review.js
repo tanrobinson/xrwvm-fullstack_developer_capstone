@@ -1,3 +1,8 @@
+/**
+ * @fileoverview This file defines the Mongoose schema for the 'reviews' collection.
+ * The schema specifies the data types and validation rules for each field in a review document.
+ */
+
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;

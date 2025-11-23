@@ -14,8 +14,20 @@ sentiment_analyzer_url = os.getenv(
 
 def get_request(endpoint, **kwargs):
     """
-    Generic GET request handler using urllib.parse.urlencode
-    for explicit encoding.
+    Performs a GET request to the specified endpoint of the backend service.
+
+    This function constructs the request URL, safely joins the base URL with the
+    endpoint, and encodes any provided keyword arguments as query parameters.
+    It then executes the GET request and returns the JSON response.
+
+    Args:
+        endpoint (str): The API endpoint to which the request will be sent.
+        **kwargs: Arbitrary keyword arguments that will be sent as query
+                  parameters.
+
+    Returns:
+        dict or None: A dictionary containing the JSON response from the
+                      backend, or None if a network or HTTP error occurs.
     """
     try:
         # Safely join base URL and endpoint
@@ -39,7 +51,19 @@ def get_request(endpoint, **kwargs):
 
 def analyze_review_sentiments(text):
     """
-    Sends text to the sentiment analyzer microservice for sentiment analysis.
+    Analyzes the sentiment of a given text by sending it to a dedicated
+    sentiment analyzer microservice.
+
+    This function encodes the text to be URL-safe, constructs the request URL,
+    and sends the text to the sentiment analyzer. It returns the sentiment
+    analysis result as a JSON object.
+
+    Args:
+        text (str): The text whose sentiment is to be analyzed.
+
+    Returns:
+        dict or None: A dictionary containing the sentiment analysis results,
+                      or None if a network or HTTP error occurs.
     """
     try:
         encoded_text = quote(text)
@@ -59,7 +83,17 @@ def analyze_review_sentiments(text):
 
 def post_review(data_dict):
     """
-    Sends a JSON review payload to the backend API for insertion.
+    Posts a new review to the backend service.
+
+    This function sends a POST request with a JSON payload (the review data)
+    to the backend's endpoint for inserting new reviews.
+
+    Args:
+        data_dict (dict): A dictionary containing the review data to be posted.
+
+    Returns:
+        dict or None: A dictionary containing the JSON response from the
+                      backend, or None if a network or HTTP error occurs.
     """
     try:
         request_url = urljoin(backend_url, "/insert_review/")

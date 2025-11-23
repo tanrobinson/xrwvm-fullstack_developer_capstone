@@ -1,3 +1,8 @@
+/**
+ * @fileoverview This file defines the Mongoose schema for the 'cars' collection.
+ * The schema specifies the data types and validation rules for each field in a car document.
+ */
+
 // const { Int32 } = require("mongodb");
 const mongoose = require("mongoose");
 

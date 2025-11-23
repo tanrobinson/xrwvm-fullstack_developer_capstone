@@ -1,3 +1,8 @@
+/**
+ * @file This file contains the `Login` component, which is a form that allows users to log in to the application.
+ *
+ * @module Login
+ */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";

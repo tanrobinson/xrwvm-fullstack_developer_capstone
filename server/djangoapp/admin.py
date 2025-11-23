@@ -1,5 +1,8 @@
-from django.contrib import admin
+"""
+This module registers the CarMake and CarModel models with the Django admin site.
+"""
 
+from django.contrib import admin  # noqa: I001
 from .models import CarMake, CarModel
 
 # Register your models here.

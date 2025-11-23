@@ -1,3 +1,8 @@
+/**
+ * @file This file contains the `Dealers` component, which is responsible for displaying a list of car dealerships.
+ *
+ * @module Dealers
+ */
 import React, { useState, useEffect } from "react";
 import "./Dealers.css";
 import "../assets/style.css";

@@ -1,3 +1,8 @@
+/**
+ * @file This file contains the `Register` component, which is a form that allows new users to register for an account.
+ *
+ * @module Register
+ */
 import React, { useState, useEffect } from "react"; // ⬅️ IMPORT useEffect
 import "./Register.css";
 import user_icon from "../assets/person.png";

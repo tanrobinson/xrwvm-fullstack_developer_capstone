@@ -1,3 +1,8 @@
+/**
+ * @fileoverview This file contains the main application logic for the Mongoose API.
+ * It sets up an Express server, connects to a MongoDB database, and defines various API endpoints for fetching and inserting data.
+ */
+
 const express = require("express");
 const mongoose = require("mongoose");
 const fs = require("fs");
@@ -5,23 +10,26 @@ const cors = require("cors");
 const app = express();
 const port = 3030;
 
+// Middleware setup
 app.use(cors());
 app.use(express.json());
-// app.use(require("body-parser").urlencoded({ extended: false }));
 
+// Read data from JSON files
 const reviews_data = JSON.parse(fs.readFileSync("reviews.json", "utf8"));
 const dealerships_data = JSON.parse(
   fs.readFileSync("dealerships.json", "utf8")
 );
 
+// Connect to MongoDB
 const mongo_url = process.env.MONGO_DB_URL;
 console.log(`Connecting to MongoDB at ${mongo_url}`);
 mongoose.connect(mongo_url, { dbName: "dealershipsDB" });
 
+// Import Mongoose models
 const Reviews = require("./review");
-
 const Dealerships = require("./dealership");
 
+// Seed the database with initial data
 try {
   Reviews.deleteMany({}).then(() => {
     Reviews.insertMany(reviews_data["reviews"]);

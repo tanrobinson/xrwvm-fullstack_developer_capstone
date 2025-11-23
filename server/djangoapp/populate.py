@@ -1,7 +1,13 @@
+"""
+This module contains a function to populate the database with initial data.
+"""
 from .models import CarMake, CarModel
 
 
 def initiate():
+    """
+    This function populates the database with initial data for CarMake and CarModel.
+    """
     car_make_data = [
         {"name": "NISSAN", "description": "Great cars. Japanese technology"},
         {"name": "Mercedes", "description": "Great cars. German technology"},

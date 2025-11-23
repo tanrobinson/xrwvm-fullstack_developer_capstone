@@ -1,86 +1,116 @@
-.navcontainer{
+/* --------------------------------------------------------------
+   NAVIGATION CONTAINER – the top‑level bar that holds all nav‑items
+   -------------------------------------------------------------- */
+.navcontainer {
+  display: flex; /* Flex‑box makes horizontal layout easy */
+  flex: 1; /* Allows the container to grow/shrink with its parent */
+  flex-direction: row; /* Default, but kept explicit for readability */
+  margin: auto; /* Center horizontally in the parent (if width permits) */
+  margin-top: 2%; /* Small vertical offset from the top of the page */
+  background-color: rgb(97, 64, 128); /* Deep purple‑lavender background */
+  align-items: flex-start; /* Align items to the top of the bar (instead of baseline) */
+}
+
+/* --------------------------------------------------------------
+   WRAPPER FOR THE GROUP OF NAVIGATION LINKS
+   -------------------------------------------------------------- */
+.navitems {
   display: flex;
-  flex: 1;
-
-  flex-direction: row;
-  margin: auto;
-  margin-top: 2%;
-  background-color: rgb(97, 64, 128);
-  align-items: flex-start;
+  flex-direction: row; /* Layout links side‑by‑side */
+  padding: 20px; /* Gives breathing room inside the bar */
+  flex: 1; /* Takes up remaining space inside .navcontainer */
+  justify-content: flex-start; /* Pushes links to the left side */
+  justify-self: center; /* If .navitems itself is a grid item this would centre it; harmless here */
 }
 
-.navitems{
-  display: flex;
-  flex-direction: row;
-  padding: 20px;
-  flex: 1;
-  justify-content: flex-start;
-  justify-self: center;
+/* --------------------------------------------------------------
+   SINGLE NAVIGATION LINK (or button) – e.g. <a class="nav_item">
+   -------------------------------------------------------------- */
+.nav_item {
+  margin-left: 15px; /* Space between successive links */
+  font-size: 20px; /* Larger, easy‑to‑click text */
+  color: azure; /* Light‑blue/white colour that contrasts with the purple bg */
+  align-self: center; /* Vertically centre each link inside the flex row */
 }
 
-.nav_item{
-  margin-left:15px;
-  font-size: 20px;
-  color: azure;
-  align-self: center;
-}
-
+/* --------------------------------------------------------------
+   INPUT PANEL – holds a search box, login fields, etc.
+   -------------------------------------------------------------- */
 .input_panel {
   display: flex;
   flex-direction: row;
   padding: 20px;
-  flex: 1;
-  justify-content: flex-end;
-  justify-self: center;
+  flex: 1; /* Same behaviour as .navitems – fills remaining space */
+  justify-content: flex-end; /* Pushes the children (field + button) to the far right */
+  justify-self: center; /* Same note as above – harmless */
 }
 
-.input_field{
-  height:40px;
-  width:200px; 
-  font-size: medium;
-  margin:.5cm;
+/* --------------------------------------------------------------
+   TEXT INPUT FIELD (e.g. <input class="input_field">)
+   -------------------------------------------------------------- */
+.input_field {
+  height: 40px; /* Reasonable tap‑target height on desktop */
+  width: 200px; /* Fixed width – adjust if you need a fluid layout */
+  font-size: medium; /* Inherit the browser’s medium size (≈ 16 px) */
+  margin: 0.5cm; /* Space around the field; using cm is unusual – consider rem/px */
 }
 
-
-.action_button{
-  cursor: pointer;
-  font-size: large;
-  color: rgb(97, 64, 128);
-  border-radius: 10px;
-  height:40px;
-  padding-left:.5cm;
-  padding-right: .5cm;
-  margin: .5cm;
+/* --------------------------------------------------------------
+   ACTION BUTTON (e.g. "Search", "Submit")
+   -------------------------------------------------------------- */
+.action_button {
+  cursor: pointer; /* Shows a hand on hover → indicates clickability */
+  font-size: large; /* Slightly bigger than normal text */
+  color: rgb(
+    97,
+    64,
+    128
+  ); /* Same purple used for the nav background – creates brand consistency */
+  border-radius: 10px; /* Rounded corners for a softer look */
+  height: 40px; /* Same height as the input field for visual alignment */
+  padding-left: 0.5cm; /* Horizontal padding – adds space inside the button */
+  padding-right: 0.5cm;
+  margin: 0.5cm; /* Space between the button and surrounding elements */
 }
 
+/* Hover effect for any element that also has the class "submit" */
 .submit:hover {
-  background-color: wheat;
+  background-color: wheat; /* Light, warm colour that indicates interaction */
 }
 
-.small_header{
+/* --------------------------------------------------------------
+   SMALL HEADER – used for sub‑titles inside the nav or other sections
+   -------------------------------------------------------------- */
+.small_header {
+  font: 30px sans-serif; /* 30 px size, default sans‑serif family */
+  color: azure; /* Same colour as navigation links */
+  margin: 0.5cm; /* Consistent spacing */
+}
+
+/* --------------------------------------------------------------
+   USERNAME DISPLAY – typically appears on the right side of the bar
+   -------------------------------------------------------------- */
+.username {
   font: 30px sans-serif;
-  color:azure;
-  margin: .5cm;
+  color: azure;
+  margin: 0.5cm;
+  justify-content: "flex-end"; /* ❗ This line does nothing because it’s a plain CSS property; 
+                                         `justify-content` only works on flex containers. */
+  align-self: flex-end; /* Moves the element to the bottom of its flex line (if container height > line‑height) */
 }
 
-.username{
-  font: 30px sans-serif;
-  color:azure;
-  margin: .5cm;
-  justify-content: 'flex-end';
-  align-self:flex-end;
-}
-
+/* --------------------------------------------------------------
+   LOGIN PANEL – a centered column that holds a login form
+   -------------------------------------------------------------- */
 .login_panel {
   display: flex;
-  flex-direction: column;
-  margin:auto;
-  margin: 0 auto;
-  width: 50%; 
-  padding: 20px;
-  flex: 1;
-  justify-content:center;
-  align-items: center;
-  vertical-align: middle;
-  
+  flex-direction: column; /* Stack the form fields vertically */
+  margin: auto; /* Horizontally centre the panel */
+  margin: 0 auto; /* Explicit version of the line above (overwrites the previous) */
+  width: 50%; /* Takes half of the viewport width – adjust for responsiveness */
+  padding: 20px; /* Inner spacing so the form isn’t glued to the edges */
+  flex: 1; /* Allows the panel to grow if its parent uses flex */
+  justify-content: center; /* Vertically centre children inside the column */
+  align-items: center; /* Horizontally centre children (e.g., inputs) */
+  vertical-align: middle; /* Has *no effect* on a flex container; can be removed */
 }

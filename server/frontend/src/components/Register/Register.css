@@ -1,127 +1,149 @@
+/* --------------------------------------------------------------
+   REGISTER CONTAINER – the outer “card” that holds the whole form
+   -------------------------------------------------------------- */
 .register_container {
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  margin-top: 2%;
-  background-color: darkturquoise;
-  min-width: 350px;
-  width: 30%;
+  display: flex; /* Flex‑box makes vertical stacking easy */
+  flex-direction: column; /* Stack header → inputs → submit vertically */
+  margin: auto; /* Center horizontally in the viewport */
+  margin-top: 2%; /* Small gap from the top edge */
+  background-color: darkturquoise; /* Distinct brand colour */
+  min-width: 350px; /* Guarantees a usable width on tiny screens */
+  width: 30%; /* Takes 30 % of the viewport (overridden by min‑width) */
 }
 
+/* --------------------------------------------------------------
+   WRAPPER FOR ALL INPUT ROWs – centres each row horizontally
+   -------------------------------------------------------------- */
 .inputs {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: column; /* One row per line */
+  align-items: center; /* Center each row horizontally inside the container */
 }
 
+/* --------------------------------------------------------------
+   SINGLE INPUT ROW – label + field (or icon + field, etc.)
+   -------------------------------------------------------------- */
 .input {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: row; /* Place label/icon and field side‑by‑side */
+  align-items: center; /* Vertically centre the two children */
 }
 
+/* --------------------------------------------------------------
+   TEXT INPUT FIELD – used for username, e‑mail, password, etc.
+   -------------------------------------------------------------- */
 .input_field {
-  height: 40px;
-  width: 200px;
-  margin: 0.5cm;
-  font-size: medium;
+  height: 40px; /* Gives a comfortable tap target */
+  width: 200px; /* Fixed width – can be changed to max‑width for fluid layouts */
+  margin: 0.5cm; /* Space around each field (cm is unusual – consider rem/px) */
+  font-size: medium; /* Inherit the browser’s medium size (≈16 px) */
 }
 
+/* --------------------------------------------------------------
+   SUBMIT PANEL – holds the (optional) error message container *and*
+   the Register button.  It is a column so the error sits above the button.
+   -------------------------------------------------------------- */
 .submit_panel {
   display: flex;
   flex-direction: column;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 5%; /* Vertical breathing room from the fields above */
+  margin-bottom: 5%; /* Same from the element below (if any) */
 }
 
+/* --------------------------------------------------------------
+   REGISTER BUTTON
+   -------------------------------------------------------------- */
 .submit {
-  margin: auto; /* Centers the button horizontally */
-  cursor: pointer;
-  font-size: large;
-  color: rgb(97, 64, 128);
-  border-radius: 10px;
-  height: 50px;
-  width: 40%; /* Give it a proportional width for centering */
+  margin: auto; /* Auto‑margin on all sides = centre horizontally */
+  cursor: pointer; /* Hand cursor signals clickability */
+  font-size: large; /* Slightly larger than normal text */
+  color: rgb(
+    97,
+    64,
+    128
+  ); /* Same purple used elsewhere for brand consistency */
+  border-radius: 10px; /* Rounded corners */
+  height: 50px; /* Matches (and slightly exceeds) the input height */
+  width: 40%; /* Proportional width – combined with auto margin = centred */
 }
 
+/* Hover style for the button (must have the .submit class as well) */
 .submit:hover {
-  background-color: wheat;
+  background-color: wheat; /* Warm highlight when the pointer is over the button */
 }
 
+/* --------------------------------------------------------------
+   HEADER – title + optional icon inside the register card
+   -------------------------------------------------------------- */
 .header {
-  display: flex; /* Makes title and icon align horizontally */
-  justify-content: space-between; /* Pushes title and icon to the ends */
-  align-items: center; /* Vertically centers content */
-  padding: 0.5cm; /* Uses padding instead of margin for internal spacing */
-  font-size: 4em sans-serif;
-  color: white;
+  display: flex; /* Flex row for title ↔ icon */
+  justify-content: space-between; /* Push title to the left, icon to the right */
+  align-items: center; /* Vertically centre both elements */
+  padding: 0.5cm; /* Internal spacing (use padding, not margin) */
+  font-size: 4em; /* Large, eye‑catching title */
+  font-family: sans-serif; /* Explicit family for consistency */
+  color: white; /* White text on dark turquoise background */
 }
 
+/* --------------------------------------------------------------
+   ICON THAT MAY APPEAR NEXT TO THE HEADER (e.g. a user silhouette)
+   -------------------------------------------------------------- */
 .img_icon {
-  width: 40px;
+  width: 40px; /* Fixed square size */
   margin: 0.1cm;
-  background-color: #0c9;
-  color: #fff;
-  border-radius: 50px;
+  background-color: #0c9; /* Teal‑green background */
+  color: #fff; /* White glyph */
+  border-radius: 50px; /* Circle */
   text-align: center;
-  box-shadow: 2px 2px 3px #999;
+  box-shadow: 2px 2px 3px #999; /* Subtle depth */
 }
 
-/* Add these styles to your Register.css file */
-
-/* 1. Password Match/Mismatch Styles */
+/* --------------------------------------------------------------
+   PASSWORD‑MATCH / MISMATCH VISUAL FEEDBACK
+   -------------------------------------------------------------- */
 .input_match {
-  /* Green border for matched passwords */
-  border: 2px solid green !important;
+  border: 2px solid green !important; /* Green border when passwords match */
 }
-
 .input_mismatch {
-  /* Red border for mismatched passwords */
-  border: 2px solid red !important;
+  border: 2px solid red !important; /* Red border when they differ */
 }
 
-/* Ensure default input_field style remains for fields without active validation */
+/* --------------------------------------------------------------
+   (Re‑declared) INPUT FIELD – we add a default border so the
+   element doesn’t “jump” when the match/mismatch classes are applied.
+   -------------------------------------------------------------- */
 .input_field {
   height: 40px;
   width: 200px;
   margin: 0.5cm;
   font-size: medium;
-  /* Add default border to prevent shift when match/mismatch styles are applied */
-  border: 1px solid grey;
-  /* Use !important on match/mismatch styles if existing CSS is overriding */
+  border: 1px solid grey; /* Neutral default border */
 }
 
-/* 2. Error Message Styles (Non-shifting) */
-/* This container ensures the Register button doesn't move when the error message appears */
+/* --------------------------------------------------------------
+   ERROR MESSAGE CONTAINER – holds an error text without moving
+   the button when it appears.
+   -------------------------------------------------------------- */
 .error_message_container {
-  /* Set a fixed height equal to the error message line height */
-  height: 20px;
+  height: 20px; /* Fixed height equal to a single line of text */
   margin-top: 5px;
   margin-bottom: 5px;
-  text-align: center;
+  text-align: center; /* Center the text inside the container */
 }
-
 .error_message {
   color: red;
   font-weight: bold;
   font-size: small;
-  /* Optional: Center the message relative to the container */
-  display: block;
+  display: block; /* Guarantees it respects the container’s height */
 }
 
-/* The submit panel holds the error container and the button */
-.submit_panel {
-  display: flex;
-  flex-direction: column;
-  margin-top: 5%;
-  margin-bottom: 5%;
-}
-
+/* --------------------------------------------------------------
+   CLOSE ICON – typically used inside a modal or toast
+   -------------------------------------------------------------- */
 .close_icon {
   width: 30px;
   height: 30px;
   cursor: pointer;
-  /* Override any image-wide styles that might break it */
-  background-color: transparent;
-  border-radius: 0;
+  background-color: transparent; /* Ensure no unwanted background */
+  border-radius: 0; /* Square shape */
 }

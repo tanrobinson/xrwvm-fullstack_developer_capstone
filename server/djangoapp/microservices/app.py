@@ -1,3 +1,7 @@
+"""
+This module contains a Flask application for sentiment analysis.
+"""
+
 import json
 
 from flask import Flask
@@ -10,12 +14,18 @@ sia = SentimentIntensityAnalyzer()
 
 @app.get("/")
 def home():
+    """
+    This function returns a welcome message.
+    """
     return "Welcome to the Sentiment Analyzer. \
     Use /analyze/text to get the sentiment"
 
 
 @app.get("/analyze/<input_txt>")
 def analyze_sentiment(input_txt):
+    """
+    This function analyzes the sentiment of the input text.
+    """
     scores = sia.polarity_scores(input_txt)
     print(scores)
     pos = float(scores["pos"])

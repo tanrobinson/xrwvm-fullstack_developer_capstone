@@ -1,10 +1,16 @@
-# Uncomment the following imports before adding the Model code
+"""
+This module defines the CarMake and CarModel models.
+"""
+
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 
-# Create your models here.
 class CarMake(models.Model):
+    """
+    This class defines the CarMake model.
+    """
+
     name = models.CharField(max_length=100)
     description = models.TextField()
 
@@ -13,6 +19,10 @@ class CarMake(models.Model):
 
 
 class CarModel(models.Model):
+    """
+    This class defines the CarModel model.
+    """
+
     car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     CAR_TYPES = [

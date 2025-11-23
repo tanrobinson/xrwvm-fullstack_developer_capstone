@@ -1,3 +1,8 @@
+/**
+ * @file This file contains the `Header` component, which is responsible for rendering the navigation bar at the top of the application.
+ *
+ * @module Header
+ */
 import React from "react";
 import "../assets/style.css";
 import "../assets/bootstrap.min.css";

@@ -1,88 +1,119 @@
+/* --------------------------------------------------------------
+   Global table styling – used for any <table> element on the page
+   -------------------------------------------------------------- */
 table {
-  margin: 5px;
-  padding: 10px;
-  border: grey solid 1px;
-  width: 100%;
+  margin: 5px; /* small outer spacing */
+  padding: 10px; /* internal spacing (rarely needed on tables) */
+  border: grey solid 1px; /* thin gray border around the whole table */
+  width: 100%; /* stretch to full width of its container */
 }
 
+/* --------------------------------------------------------------
+   Table data cells – default style for every <td>
+   -------------------------------------------------------------- */
 td {
-  padding: 10px;
-  align-self: center;
-  border: solid grey 0.5px;
-  text-align: center;
-  font-size: large;
+  padding: 10px; /* breathing room for cell content */
+  align-self: center; /* centering when <td> is inside a flex container */
+  border: solid grey 0.5px; /* subtle inner cell borders */
+  text-align: center; /* horizontal centering of the text */
+  font-size: large; /* a bit larger than the body default */
 }
 
+/* --------------------------------------------------------------
+   .review_panel – the “card” that holds a single review
+   -------------------------------------------------------------- */
 .review_panel {
-  display: flex;
-  flex-direction: column;
-  border: solid grey;
-  position: relative;
-  height: 7cm;
-  width: 6cm;
-  overflow-y: scroll;
-  padding: 0.3cm;
-  padding-top: 0%;
-  border-radius: 10px;
-  box-shadow: 0px 1px 12px rgba(0, 0, 0, 0.5);
-  margin-bottom: 0.5cm;
-  justify-content: space-between;
+  display: flex; /* Flexbox makes the inner layout easy */
+  flex-direction: column; /* Stack children vertically */
+  border: solid grey; /* simple outline for the card */
+  position: relative; /* needed for absolutely‑positioned children (e.g. .emotion_icon) */
+  height: 7cm; /* fixed visual height – change to %/vh if you want responsive */
+  width: 6cm; /* fixed visual width  */
+  overflow-y: scroll; /* vertical scrolling when content exceeds height */
+  padding: 0.3cm; /* inner spacing around the content */
+  padding-top: 0%; /* overrides top‑padding – effectively 0 */
+  border-radius: 10px; /* rounded corners */
+  box-shadow: 0px 1px 12px rgba(0, 0, 0, 0.5); /* subtle drop‑shadow for depth */
+  margin-bottom: 0.5cm; /* spacing to the next element */
+  justify-content: space-between; /* push first & last child to opposite ends */
 }
 
+/* --------------------------------------------------------------
+   .postreview – the “Add a Review” button/area
+   -------------------------------------------------------------- */
 .postreview {
-  margin: 20px;
-  padding: 10px;
-  font-size: larger;
+  margin: 20px; /* space around the button */
+  padding: 10px; /* inner space for the label */
+  font-size: larger; /* make it stand out */
 }
 
+/* --------------------------------------------------------------
+   Table header cells – <th> elements
+   -------------------------------------------------------------- */
 th {
   padding: 5px;
-  align-self: center;
+  align-self: center; /* same reasoning as <td> */
   text-align: center;
   font-size: large;
-  margin-bottom: 1cm;
+  margin-bottom: 1cm; /* extra space below the header row */
   vertical-align: middle;
-  color: black;
+  color: black; /* explicit colour for readability */
 }
 
+/* --------------------------------------------------------------
+   .reviews_panel – the wrapper that holds a *grid* of review cards
+   -------------------------------------------------------------- */
 .reviews_panel {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  column-gap: 1cm;
-  overflow-wrap: normal;
-  margin-top: 1cm;
-  align-items: flex-start;
+  flex-direction: row; /* lay cards side‑by‑side */
+  flex-wrap: wrap; /* wrap onto new lines when needed */
+  column-gap: 1cm; /* horizontal gap between cards */
+  overflow-wrap: normal; /* default word‑wrap behaviour */
+  margin-top: 1cm; /* spacing above the whole block */
+  align-items: flex-start; /* align cards to the top of the row */
 }
 
+/* --------------------------------------------------------------
+   .reviewer – the credit line that shows who wrote the review
+   -------------------------------------------------------------- */
 .reviewer {
-  margin: 10px; /* Optional margin for spacing */
-  font-style: italic;
-  color: gray;
-  font-size: small;
+  margin: 10px; /* spacing around the credit line */
+  font-style: italic; /* give it a “citation” feel */
+  color: gray; /* de‑emphasise relative to the review text */
+  font-size: small; /* smaller than body text */
 }
 
+/* --------------------------------------------------------------
+   .review – container for the actual review text/content
+   -------------------------------------------------------------- */
 .review {
-  margin-top: 1.5cm;
+  margin-top: 1.5cm; /* push the text down, creating visual separation */
 }
 
+/* --------------------------------------------------------------
+   .emotion_icon – the circular badge that shows an emoji/emoji‑like icon
+   -------------------------------------------------------------- */
 .emotion_icon {
-  align-self: center;
-  position: absolute;
+  align-self: center; /* center within flex parent (if any) */
+  position: absolute; /* placed relative to .review_panel (its nearest positioned ancestor) */
   width: 40px;
   height: 40px;
-  background-color: #0c9;
-  color: #fff;
-  border-radius: 50px;
-  text-align: center;
-  box-shadow: 2px 2px 3px #999;
+  background-color: #0c9; /* teal‑green background */
+  color: #fff; /* white glyph/emoji */
+  border-radius: 50px; /* make it a circle */
+  text-align: center; /* centre the glyph inside */
+  box-shadow: 2px 2px 3px #999; /* subtle 3‑D lift */
 }
 
+/* --------------------------------------------------------------
+   .review_icon – the “thumb‑up / thumb‑down” image used inside a review
+   -------------------------------------------------------------- */
 .review_icon {
-  width: 40px;
+  width: 40px; /* consistent size for all icons */
 }
 
+/* Hover effect for review icons – scale up + light border */
 .review_icon:hover {
-  transform: scale(1.1);
-  border: solid lightgray;
+  transform: scale(1.1); /* grow 10 % on hover */
+  border: solid lightgray; /* optional thin outline on hover */
 }

@@ -1,3 +1,8 @@
+/**
+ * @file This file contains the `Dealer` component, which is responsible for displaying detailed information about a specific car dealership, including its reviews.
+ *
+ * @module Dealer
+ */
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./Dealers.css";

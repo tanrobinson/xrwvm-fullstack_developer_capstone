@@ -1,3 +1,8 @@
+/**
+ * @file This file contains the `PostReview` component, which is a form that allows users to post a review for a specific car dealership.
+ *
+ * @module PostReview
+ */
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./Dealers.css";
